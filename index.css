@@ -1,0 +1,88 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+
+    --width: min(98vw, max(800px, 80vw));
+    --header-height: 7vh;
+    --container-height: 60vh;
+    --controls-height: 20vh;
+    --footer-height: 5vh;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    margin-top: calc((100vh - (var(--header-height) + var(--container-height)
+     + var(--controls-height) + var(--footer-height))) / 2);
+}
+
+#background-img {
+    position: fixed;
+    top: -2.5%;
+    left: -2.5%;
+    width: 105%;
+    height: 105%;
+    background-image: url('graphics/backgroundPicture_1.webp');
+    background-position: center;
+    background-size: cover;
+    filter: blur(5px); /* Apply blur filter to the background image */
+    z-index: -1; /* Ensure the background is behind other content */
+}
+
+.header {
+    width: var(--width);
+    height: var(--header-height);
+    font-size: 3rem;
+    text-align: center;
+    color: white;
+}
+
+.container {
+    width: var(--width);
+    --height: 60vh;
+    height: var(--container-height);
+    background-color: rgba(255, 255, 255);
+    border-radius: 5px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.container-header {
+    
+}
+
+.books-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-auto-rows: 200px;
+    gap: 5px;
+}
+
+.book-card {
+    background-color: blanchedalmond;
+}
+
+.controls {
+    width: var(--width);
+    height: var(--controls-height);
+    background-color: beige;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    padding: 10px;
+}
+
+.controls > * {
+    flex-grow: 1;
+}
+
+.footer {
+    width: 100vw;
+    height: var(--footer-height);
+    position: fixed;
+    bottom: 0;
+}

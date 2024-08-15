@@ -1,0 +1,12 @@
+// to add books
+click button to open up dialog of a form
+add info like name, author, number of pages
+haveRead -> will reread or not
+how many pages read 
+
+display each book
+
+add button to remove a book
+
+edit book's info
+button to mark it read / not finished
