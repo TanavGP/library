@@ -3,11 +3,14 @@
     margin: 0;
     box-sizing: border-box;
 
-    --width: min(98vw, max(800px, 80vw));
-    --header-height: 5vh;
-    --container-height: 65vh;
-    --controls-height: 20vh;
-    --footer-height: 5vh;
+    --full-width: calc(100 * var(--vw));
+    --full-height: calc(100 * var(--vh));
+
+    --width: min(calc(95 * var(--vw)), max(800px, calc(80 * var(--vw))));
+    --header-height: calc(5 * var(--vh));
+    --container-height: calc(65 * var(--vh));
+    --controls-height: calc(20 * var(--vh));
+    --footer-height: calc(5 * var(--vh));
 }
 
 body {
@@ -15,7 +18,7 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 5px;
-    margin-top: calc((100vh - (var(--header-height) + var(--container-height)
+    margin-top: calc((var(--full-height) - (var(--header-height) + var(--container-height)
      + var(--controls-height) + var(--footer-height))) / 2);
 }
 
@@ -35,30 +38,35 @@ body {
 .header {
     width: var(--width);
     height: var(--header-height);
-    font-size: max(2rem, 2.5vw);
+    font-size: max(2rem, calc(2.5 * var(--vw)));
     text-align: center;
     color: white;
 }
 
 .container {
     width: var(--width);
-    --height: 60vh;
     height: var(--container-height);
     background-color: rgba(255, 255, 255);
     border-radius: 5px;
     overflow-y: auto;
     overflow-x: hidden;
+    padding: 10px;
 }
 
 .container-header {
-
+    font-size: max(1rem, calc(1.5 * var(--vw)));
+    font-family: sans-serif;
+    font-weight: bold;
+    padding-left: var(--vw);
 }
 
 .books-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(max(300px, calc(20 * var(--vw))), 1fr));
     grid-auto-rows: 200px;
-    gap: 5px;
+    gap: calc(var(--vh));
+    padding: 10px;
+    background-color: rgb(246, 102, 112);
 }
 
 .book-card {
@@ -81,7 +89,7 @@ body {
 }
 
 .footer {
-    width: 100vw;
+    width: var(--full-width);
     height: var(--footer-height);
     position: fixed;
     bottom: 0;
@@ -94,7 +102,7 @@ body {
 
 h6 {
     font-weight: normal;
-    font-size: max(0.7rem, 1vw);
+    font-size: max(0.7rem, var(--vw));
 }
 
 h6 a {
