@@ -10,3 +10,6 @@ add button to remove a book
 
 edit book's info
 button to mark it read / not finished
+
+color palettes
+https://colorhunt.co/palette/914f1edeac80f7dcb9b5c18e

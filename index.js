@@ -4,9 +4,6 @@ function setDynamicViewport() {
 
     document.documentElement.style.setProperty('--vh', `${vh}px`);
     document.documentElement.style.setProperty('--vw', `${vw}px`);
-
-    const headerElement = document.querySelector('.header');
-    headerElement.innerHTML = String(vw) + ", " + String(vh);
 }
 
 window.addEventListener('resize', setDynamicViewport);
