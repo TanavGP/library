@@ -117,12 +117,19 @@ function addAddButtonEventListener() {
     addButtonElement.addEventListener('click', loadAddBookContainer);
 }
 
+function addCancelButtonEventListener() {
+    const cancelButtonElement = document.querySelector('.cancel');
+    cancelButtonElement.addEventListener('click', cancelAddBook);
+}
+
 function swapColors(e) {
     const svgDiv = e.target.children[0];
+    const textPara = e.target.children[1];
 
     const svgColor = svgDiv.style.backgroundColor || window.getComputedStyle(svgDiv).backgroundColor;
     const targetColor = e.target.style.backgroundColor || window.getComputedStyle(e.target).backgroundColor;
 
+    textPara.style.color = targetColor;
     svgDiv.style.backgroundColor = targetColor;
     e.target.style.backgroundColor = svgColor;
 }
@@ -130,23 +137,16 @@ function swapColors(e) {
 function addControlHoverEventListener(controlElement) {
     controlElement.addEventListener('mouseenter', (e) => {
         swapColors(e);
-        const textPara = e.target.children[1];
-        textPara.style.color = "white";
     })
 
     controlElement.addEventListener('mouseleave', (e) => {
         swapColors(e);
-        const textPara = e.target.children[1];
-        textPara.style.color = "black";
     })
 }
 
 function addControlsHoverEventListener() {
-    const removeButtonElement = document.querySelector('.remove');
-    const addButtonElement = document.querySelector('.add');
-    const editButtonElement = document.querySelector('.edit');
-
-    [removeButtonElement, addButtonElement, editButtonElement].forEach(e => {
+    const controlsArray = document.querySelector('.controls').children;
+    Array.from(controlsArray).forEach(e => {
         addControlHoverEventListener(e);
     })
 }
@@ -283,6 +283,11 @@ function unloadContainer() {
     controlsElement.replaceChildren();
 }
 
+function cancelAddBook() {
+    unloadContainer();
+    loadBookContainer();
+}
+
 function loadBookContainer() {
     unloadContainer();
     loadBooks();
@@ -298,7 +303,10 @@ function loadAddBookContainer() {
     unloadContainer();
     setContainerHeading('Add Book');
     addControlButtons('cancel', 'confirm');
+    addCancelButtonEventListener();
+    addControlsHoverEventListener();
 }
 
 
 loadBookContainer();
+//loadAddBookContainer();

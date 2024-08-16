@@ -11,6 +11,32 @@
     --container-height: calc(75 * var(--vh));
     --controls-height: calc(8 * var(--vh));
     --footer-height: calc(5 * var(--vh));
+
+    --body-bg-color: rgb(34, 40, 49);
+    --container-bg-color: rgb(57, 62, 70);
+    --book-container-bg-color: transparent;
+    --book-card-bg-color: rgb(34, 40, 49);
+    --finished-button-bg-color: rgb(0, 173, 181);
+    --unfinished-button-bg-color: rgb(57, 62, 70);
+    --control-button-bg-color: rgb(49, 49, 49);
+    --footer-bg-color: rgb(57, 62, 70);
+
+    --header-text-color: white;
+    --container-header-text-color: rgb(0, 173, 181);
+    --title-text-color: rgb(0, 173, 181);
+    --author-text-color: white;
+    --notes-text-color: rgb(163, 163, 163);
+    --extra-info-text-color: rgb(163, 163, 163);
+    --controls-text-color: rgb(0, 173, 181);
+    --footer-text-color: rgb(255, 255, 255);
+    --footer-link-text-color: rgb(0, 173, 181);
+    --footer-link-text-hover-color: rgb(40, 212, 222);
+
+    --container-border-color: black;
+    --book-card-border-hover-color: rgb(86, 86, 86);
+    --book-car-border-selected-color: black;
+
+    --title-border-bottom-color: black;
 }
 
 .non-selectable {
@@ -26,20 +52,8 @@ body {
     align-items: center;
     gap: 5px;
     margin-top: calc((var(--full-height) - (var(--header-height) + var(--container-height)
-     + var(--controls-height) + var(--footer-height))) / 2);
-}
-
-#background-img {
-    position: fixed;
-    top: -2.5%;
-    left: -2.5%;
-    width: 105%;
-    height: 105%;
-    background-image: url('graphics/backgroundPicture_1.webp');
-    background-position: center;
-    background-size: cover;
-    filter: blur(5px); /* Apply blur filter to the background image */
-    z-index: -1; /* Ensure the background is behind other content */
+     + var(--controls-height) + var(--footer-height))) / 2 - 10px);
+    background-color: var(--body-bg-color);
 }
 
 .header {
@@ -47,13 +61,14 @@ body {
     height: var(--header-height);
     font-size: calc(4 * var(--vh));
     text-align: center;
-    color: white;
+    color: var(--header-text-color);
+    margin-bottom: 5px;
 }
 
 .container {
     width: var(--width);
     height: var(--container-height);
-    background-color: rgb(255,193,140);
+    background-color: var(--container-bg-color);
     border-radius: 15px;
     overflow-y: auto;
     overflow-x: hidden;
@@ -63,7 +78,7 @@ body {
     flex-direction: column;
     gap: var(--vh);
     box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.3);
-    border: 2px solid black;
+    border: 2px solid var(--container-border-color);
 }
 
 .container::-webkit-scrollbar {
@@ -94,36 +109,51 @@ body {
     display: flex;
     align-items: center;
     gap: 4px;
+    color: var(--container-header-text-color);
 }
 
 .container-header .svg {
     height: max(1rem, calc(2 * var(--vw)));
+    background-color: var(--container-header-text-color);
 }
 
-.books-container {
+/* .books-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(max(300px, calc(20 * var(--vw))), 1fr));
     grid-auto-rows: 200px;
     gap: calc(var(--vh));
     padding: 10px;
-    background-color: rgb(132,36,12);
+    background-color: var(--book-container-bg-color);
+} */
+
+.books-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: calc(var(--vh));
 }
 
 .book-card {
-    background-color: rgb(231,207,180);
+    background-color: var(--book-card-bg-color);
     border-radius: 5px;
     padding: 10px;
     display: flex;
     flex-direction: column;
     border: 2px solid transparent;
+    transition: all 0.3s ease;
+    
+    /* below is for flex */
+    height: 200px;
+    flex-grow: 1;
 }
 
 .book-card:hover {
-    border: 2px solid rgb(86, 86, 86);
+    border: 2px solid var(--book-card-border-hover-color);
 }
 
 .book-card.selected {
-    border: 2px solid black
+    border: 2px solid var(--book-car-border-selected-color);
 }
 
 .book-card .svg {
@@ -134,10 +164,12 @@ body {
     font-size: min(calc((2 * var(--vw) + 1.5 * var(--vh))), 1.3rem);
     font-weight: bold;
     padding-bottom: 2px;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid var(--title-border-bottom-color);
     display: flex;
     align-items: center;
     justify-content: space-between;
+    color: var(--title-text-color);
+    font-family: "Montserrat";
 }
 
 .title button {
@@ -151,11 +183,11 @@ body {
 }
 
 .finished {
-    background-color: green;
+    background-color: var(--finished-button-bg-color);
 }
 
 .unfinished {
-    background-color: red;
+    background-color: var(--unfinished-button-bg-color);
 }
 
 .title button:hover {
@@ -166,12 +198,14 @@ body {
     display: flex;
     gap: 5px;
     font-size: min(calc((1.5 * var(--vw) + 1.5 * var(--vh))), 1rem);
+    color: var(--author-text-color);
+    font-style: italic;
 }
 
 .notes {
     width: 100%;
     flex-grow: 1;
-    color: rgb(86,50,50);
+    color: var(--notes-text-color);
     padding-right: 5px;
     overflow: auto;
 }
@@ -205,6 +239,7 @@ body {
     justify-content: space-between;
     align-items: center;
     font-size: min(calc((1.5 * var(--vw) + 1.5 * var(--vh))), 0.8rem);
+    color: var(--extra-info-text-color);
 }
 
 .controls {
@@ -225,12 +260,13 @@ body {
     gap: var(--vw);
     border-radius: 10px;
     box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.3);
-
     transition: background-color 0.3s ease;
+    background-color: var(--control-button-bg-color);
 }
 
 .controls h5 {
     font-size: max(0.8rem, var(--vw));
+    color: var(--controls-text-color);
     transition: color 0.3s ease
 }
 
@@ -244,8 +280,8 @@ body {
     height: var(--footer-height);
     position: fixed;
     bottom: 0;
-    background-color: rgb(142, 77, 27);
-    color: rgb(255, 255, 255);
+    background-color: var(--footer-bg-color);
+    color: var(--footer-text-color);
     font-family: sans-serif;
     display: grid;
     place-content: center;
@@ -257,12 +293,12 @@ h6 {
 }
 
 h6 a {
-    color: rgb(231,207,180);
+    color: var(--footer-link-text-color);
     text-decoration: none;
 }
 
 h6 a:hover {
-    color: rgb(255,193,140);
+    color: var(--footer-link-text-hover-color);
 }
 
 /* SVGs */
@@ -274,17 +310,17 @@ h6 a:hover {
 
 .remove-svg {
     mask-image: url(graphics/svgs/remove.svg);
-    background-color: rgb(222, 2, 2);
+    background-color: rgb(0, 173, 181);
 }
 
 .add-svg {
     mask-image: url(graphics/svgs/add.svg);
-    background-color: green;
+    background-color: rgb(0, 173, 181);
 }
 
 .edit-svg {
     mask-image: url(graphics/svgs/edit.svg);
-    background-color: rgb(0, 56, 240);
+    background-color: rgb(0, 173, 181);
 }
 
 .author-svg {
@@ -299,12 +335,12 @@ h6 a:hover {
 
 .star-svg {
     mask-image: url(graphics/svgs/star.svg);
-    background-color: rgb(171, 62, 3);
+    background-color: rgb(163, 163, 163);
 }
 
 .empty-star-svg {
     mask-image: url(graphics/svgs/empty_star.svg);
-    background-color: rgb(181, 59, 7);
+    background-color: rgb(163, 163, 163);
 }
 
 .bookmark-svg {
@@ -317,14 +353,22 @@ h6 a:hover {
     background-color: white;
 }
 
+.confirm-svg {
+    background-color: rgb(0, 173, 181);
+}
+
+.cancel-svg {
+    background-color: rgb(0, 173, 181);
+}
+
 .cross-svg, .cancel-svg {
     mask-image: url(graphics/svgs/cross.svg);
-    background-color: white;
+    background-color: rgb(0, 173, 181);
 }
 
 .pages-svg {
     mask-image: url(graphics/svgs/pages.svg);
-    background-color: black;
+    background-color: rgb(195, 195, 195);
 }
 
 .epic-fantasy-svg {
