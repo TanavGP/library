@@ -13,6 +13,13 @@
     --footer-height: calc(5 * var(--vh));
 }
 
+.non-selectable {
+    user-select: none; /* Prevent text selection */
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+}
+
 body {
     display: flex;
     flex-direction: column;
@@ -86,6 +93,7 @@ body {
     padding-left: var(--vw);
     display: flex;
     align-items: center;
+    gap: 4px;
 }
 
 .container-header .svg {
@@ -111,7 +119,11 @@ body {
 }
 
 .book-card:hover {
-    border: 2px solid black;
+    border: 2px solid rgb(86, 86, 86);
+}
+
+.book-card.selected {
+    border: 2px solid black
 }
 
 .book-card .svg {
@@ -119,15 +131,41 @@ body {
 }
 
 .title {
-    font-size: 1.3rem;
+    font-size: min(calc((2 * var(--vw) + 1.5 * var(--vh))), 1.3rem);
     font-weight: bold;
     padding-bottom: 2px;
     border-bottom: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.title button {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 2px 5px;
+    border: none;
+    border-radius: 4px;
+    color: white;
+}
+
+.finished {
+    background-color: green;
+}
+
+.unfinished {
+    background-color: red;
+}
+
+.title button:hover {
+    filter: brightness(0.9);
 }
 
 .author {
     display: flex;
     gap: 5px;
+    font-size: min(calc((1.5 * var(--vw) + 1.5 * var(--vh))), 1rem);
 }
 
 .notes {
@@ -158,16 +196,15 @@ body {
     background-color: rgba(0, 0, 0, 0.4); /* Darken on hover for visibility */
 }
 
-.extra-info, .genre, .rating {
+.extra-info, .pages, .genre, .rating {
     display: flex;
     flex-direction: row;
     gap: 3px;
     font-family: sans-serif;
     padding-top: 3px;
-}
-
-.rating {
-    margin-left: auto;
+    justify-content: space-between;
+    align-items: center;
+    font-size: min(calc((1.5 * var(--vw) + 1.5 * var(--vh))), 0.8rem);
 }
 
 .controls {
@@ -188,14 +225,18 @@ body {
     gap: var(--vw);
     border-radius: 10px;
     box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.3);
+
+    transition: background-color 0.3s ease;
 }
 
 .controls h5 {
     font-size: max(0.8rem, var(--vw));
+    transition: color 0.3s ease
 }
 
 .controls .svg {
     height: max(calc(3 * var(--vw)), 30px);
+    transition: background-color 0.3s ease;
 }
 
 .footer {
@@ -251,11 +292,6 @@ h6 a:hover {
     background-color: black;
 }
 
-.genre-svg {
-    mask-image: url(graphics/svgs/genre.svg);
-    background-color: rgb(164, 3, 3);
-}
-
 .notes-svg {
     mask-image: url(graphics/svgs/notes.svg);
     background-color: black;
@@ -274,4 +310,59 @@ h6 a:hover {
 .bookmark-svg {
     mask-image: url(graphics/svgs/bookmark.svg);
     background-color: black;
+}
+
+.tick-svg, .confirm-svg {
+    mask-image: url(graphics/svgs/tick.svg);
+    background-color: white;
+}
+
+.cross-svg, .cancel-svg {
+    mask-image: url(graphics/svgs/cross.svg);
+    background-color: white;
+}
+
+.pages-svg {
+    mask-image: url(graphics/svgs/pages.svg);
+    background-color: black;
+}
+
+.epic-fantasy-svg {
+    mask-image: url(graphics/svgs/epic-fantasy.svg);
+    background-color: rgb(164, 3, 3);
+}
+
+.horror-svg {
+    mask-image: url(graphics/svgs/horror.svg);
+    background-color: rgb(164, 3, 3);
+}
+
+.science-fiction-svg {
+    mask-image: url(graphics/svgs/science-fiction.svg);
+    background-color: rgb(164, 3, 3);
+}
+
+.drama-svg {
+    mask-image: url(graphics/svgs/drama.svg);
+    background-color: rgb(164, 3, 3);
+}
+
+.romance-svg {
+    mask-image: url(graphics/svgs/romance.svg);
+    background-color: rgb(164, 3, 3);
+}
+
+.action-svg {
+    mask-image: url(graphics/svgs/action.svg);
+    background-color: rgb(164, 3, 3);
+}
+
+.comedy-svg {
+    mask-image: url(graphics/svgs/comedy.svg);
+    background-color: rgb(164, 3, 3);
+}
+
+.thriller-svg {
+    mask-image: url(graphics/svgs/thriller.svg);
+    background-color: rgb(164, 3, 3);
 }

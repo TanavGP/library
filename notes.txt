@@ -13,3 +13,67 @@ button to mark it read / not finished
 
 color palettes
 https://colorhunt.co/palette/914f1edeac80f7dcb9b5c18e
+
+
+storage
+
+<div class="book-card selected">
+    <div class="title">
+        <p>Lord of The Rings</p>
+        <button class="finished">
+            <div>Finished</div>
+            <div class="svg tick-svg"></div>
+        </button>
+    </div>
+    <div class="author">J.R.R Tolkien</div>
+    <div class="notes non-selectable">
+        An epic journey through a richly detailed world of fantasy, friendship, and heroism. 
+        Tolkien's masterpiece is timeless and captivating.
+    </div>
+    <div class="extra-info non-selectable">
+        <div class="genre">
+            <div class="svg epic-fantasy-svg"></div>
+            <p>Epic Fantasy</p>
+        </div>
+        <div class="pages">
+            <div class="svg pages-svg"></div>
+            <div class="number">252</div>
+        </div>
+        <div class="rating">
+            <div class="svg star-svg"></div>
+            <div class="svg star-svg"></div>
+            <div class="svg star-svg"></div>
+            <div class="svg empty-star-svg"></div>
+            <div class="svg empty-star-svg"></div>
+        </div>
+    </div>
+</div>
+<div class="book-card">
+    <div class="title">
+        <p>Lord of The Rings</p>
+        <button class="unfinished">
+            <div>Ongoing</div>
+            <div class="svg cross-svg"></div>
+        </button>
+    </div>
+    <div class="author">
+        <div class="author-name">J.R.R Tolkien</div>
+    </div>
+    <div class="notes">
+        An epic journey through a richly detailed world of fantasy, friendship, and heroism. 
+        Tolkien's masterpiece is timeless and captivating.
+    </div>
+    <div class="extra-info">
+        <div class="genre">
+            <div class="svg epic-fantasy-svg"></div>
+            <p>Epic Fantasy</p>
+        </div>
+        <div class="rating">
+            <div class="svg star-svg"></div>
+            <div class="svg star-svg"></div>
+            <div class="svg star-svg"></div>
+            <div class="svg empty-star-svg"></div>
+            <div class="svg empty-star-svg"></div>
+        </div>
+    </div>
+</div>
