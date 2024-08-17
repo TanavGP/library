@@ -21,51 +21,7 @@ function Book(name, author, notes, haveRead, genre, pages, rating, id) {
     this.id = id;
 }
 
-const book1 = new Book(
-    "The Name of the Wind",
-    "Patrick Rothfuss",
-    "A beautifully written tale of a young man's journey into legend.",
-    true,
-    "Horror",
-    662,
-    5,
-    1
-);
-
-const book2 = new Book(
-    "The Girl with the Dragon Tattoo",
-    "Stieg Larsson",
-    "A gripping thriller with complex characters and a dark plot.",
-    true,
-    "Thriller",
-    465,
-    4,
-    2
-);
-
-const book3 = new Book(
-    "Dune",
-    "Frank Herbert",
-    "A sci-fi epic set on a desert planet with political intrigue and adventure.",
-    false,
-    "Science Fiction",
-    412,
-    5,
-    3
-);
-
-const book4 = new Book(
-    "Lord of The Rings",
-    "J.R.R Tolkien",
-    "An epic journey through a richly detailed world of fantasy, friendship, and heroism. Tolkien's masterpiece is timeless and captivating.",
-    true,
-    "Epic Fantasy",
-    252,
-    5,
-    4
-);
-
-let books = [book1, book2, book3, book4];
+let books = getBooksFromLocalStorage();
 let cancelEditBook = null;
 let idSelected = null;
 let genres = [
@@ -78,6 +34,16 @@ let genres = [
     "Comedy",
     "Thriller"
 ];
+
+function saveBooksToLocalStorage() {
+    const booksJSON = JSON.stringify(books);
+    localStorage.setItem('books', booksJSON);
+}
+
+function getBooksFromLocalStorage() {
+    const booksJSON = localStorage.getItem('books');
+    return booksJSON ? JSON.parse(booksJSON) : [];
+}
 
 function setSelectedBook(idToSelect)
 {
@@ -124,6 +90,7 @@ function removeBook() {
     idSelected = null;
 
     normalizeIds();
+    saveBooksToLocalStorage()
     loadBookContainer();
 }
 
@@ -292,6 +259,7 @@ function loadFormContainer(id = 0) {
         })
 
         books = books.filter(bookF => bookF.id !== id)
+        saveBooksToLocalStorage()
     }
 
     const booksContainerElement = document.querySelector('.books-container');
@@ -521,6 +489,7 @@ function addRatingEventListener() {
 
 function loadBooks() {
     books.sort((a, b) => a.id - b.id);
+    saveBooksToLocalStorage()
     books.forEach(book => {
         addBookCard(book);
     });
@@ -591,6 +560,7 @@ function addBook(e) {
         pageCount, rating, idSelected === null ? books.length + 1 : idSelected);
 
     books.push(book);
+    saveBooksToLocalStorage()
     loadBookContainer();
 }
 
