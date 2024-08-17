@@ -20,6 +20,7 @@
     --unfinished-button-bg-color: rgb(57, 62, 70);
     --control-button-bg-color: rgb(49, 49, 49);
     --footer-bg-color: rgb(57, 62, 70);
+    --form-bg-color: rgb(34, 40, 49);
 
     --header-text-color: white;
     --container-header-text-color: rgb(0, 173, 181);
@@ -36,7 +37,7 @@
     --book-card-border-hover-color: rgb(86, 86, 86);
     --book-car-border-selected-color: black;
 
-    --title-border-bottom-color: black;
+    --title-border-bottom-color: grey;
 }
 
 .non-selectable {
@@ -63,6 +64,9 @@ body {
     text-align: center;
     color: var(--header-text-color);
     margin-bottom: 5px;
+    font-family: sans-serif;
+    font-weight: bold;
+    letter-spacing: 2px;
 }
 
 .container {
@@ -132,6 +136,7 @@ body {
     flex-wrap: wrap;
     align-items: center;
     gap: calc(var(--vh));
+    justify-content: center;
 }
 
 .book-card {
@@ -164,6 +169,7 @@ body {
     font-size: min(calc((2 * var(--vw) + 1.5 * var(--vh))), 1.3rem);
     font-weight: bold;
     padding-bottom: 2px;
+    margin-bottom: 2px;
     border-bottom: 1px solid var(--title-border-bottom-color);
     display: flex;
     align-items: center;
@@ -301,6 +307,170 @@ h6 a:hover {
     color: var(--footer-link-text-hover-color);
 }
 
+form {
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    gap: 10px;
+    width: min(85%, 350px);
+    padding: 20px;
+    border-radius: 15px;
+    background-color: var(--form-bg-color);
+    box-shadow: 0 0 5px rgba(2, 209, 255, 0.5);
+    padding-top: 13px;
+}
+
+textarea {
+    resize: none;
+    overflow-y: hidden;
+    border: 2px solid transparent;
+    font-family: sans-serif;
+    padding: 5px;
+    border-radius: 3px;
+    min-height: 50px;
+}
+
+input:focus, 
+textarea:focus, 
+select:focus {
+    outline: none;
+    border: 2px solid #4A90E2; /* Custom border color */
+    box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+}
+
+fieldset {
+    border: none;
+}
+
+label, legend {
+    font-size: max(1rem, calc(var(--vw)));
+    font-family: sans-serif;
+    color: white;
+    letter-spacing: 1px;
+}
+
+legend {
+    padding-bottom: 4px;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+.finished-container {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid gray;
+    border-radius: 3px;
+}
+
+.finished-radio {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+}
+
+/* Style for the label */
+.finished-radio label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 4px 8px;
+    flex-grow: 1;
+    text-align: center;
+}
+
+.finished-radio .svg {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+    background-color: lightgray; /* Default background color */
+    transition: background-color 0.3s ease;
+}
+
+input[name=finished]:checked + label{
+    background-color: #4A90E2;
+    box-shadow: 0 0 5px rgba(2, 209, 255, 0.5);
+}
+
+.custom-radio label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.custom-radio .svg {
+    width: 24px;
+    height: 24px;
+    background-color: gray; /* Default background */
+    margin-right: 10px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.custom-radio div {
+    font-size: 0.8rem;
+}
+
+.custom-radio input[type="radio"]:checked + label .svg {
+    background-color: red;
+    color: red;
+}
+
+.custom-radio input[type="radio"]:checked + label {
+    color: red;
+}
+
+.custom-radio .svg:hover {
+    background-color: gold;
+}
+
+.custom-radio label:hover {
+    color: gold;
+}
+
+form > div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+form > div > input {
+    height: 30px;
+    font-size: 80%;
+    padding-left: 5px;
+}
+
+.form-rating > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.form-rating input[type="checkbox"] {
+    display: none;
+}
+
+.form-rating label {
+    width: 24px; /* Adjust the size of the star */
+    height: 24px;
+    cursor: pointer;
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: inline-block;
+}
+
+.form-rating input[type="checkbox"]:checked + label {
+    mask-image: url(graphics/svgs/star.svg);
+    background-color: rgb(0, 173, 181);
+}
+
+.form-rating input[type="checkbox"] + label {
+    mask-image: url(graphics/svgs/empty_star.svg);
+    background-color: rgb(0, 173, 181);
+}
+
 /* SVGs */
 .svg {
     aspect-ratio: 1 / 1;
@@ -358,6 +528,11 @@ h6 a:hover {
 }
 
 .cancel-svg {
+    background-color: rgb(0, 173, 181);
+}
+
+.reset-svg {
+    mask-image: url(graphics/svgs/reset.svg);
     background-color: rgb(0, 173, 181);
 }
 
