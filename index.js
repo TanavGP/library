@@ -22,7 +22,6 @@ function Book(name, author, notes, haveRead, genre, pages, rating, id) {
 }
 
 let books = getBooksFromLocalStorage();
-let cancelEditBook = null;
 let idSelected = null;
 let genres = [
     "Epic Fantasy",
@@ -47,6 +46,11 @@ function getBooksFromLocalStorage() {
 
 function setSelectedBook(idToSelect)
 {
+    if (idToSelect === idSelected) {
+        deselectBook();
+        return;
+    }
+
     books.forEach(book => {
         if (idSelected !== null && book.id === idSelected) {
             const selectedBookElement = document.querySelector('#book-' + idSelected);
@@ -62,14 +66,30 @@ function setSelectedBook(idToSelect)
     idSelected = idToSelect;
 }
 
+function deselectBook() {
+    if (idSelected === null) {
+        return;
+    }
+
+    const selectedBookElement = document.querySelector('#book-' + idSelected);
+    selectedBookElement.classList.remove('selected');
+    idSelected = null;
+}
 
 function addSelectionEventListener() {
     books.forEach(book => {
         const bookElement = document.querySelector('#book-' + book.id);
-        bookElement.addEventListener('click', () => {
+        bookElement.addEventListener('click', (event) => {
+            event.stopPropagation();
             setSelectedBook(book.id);
         })
     })
+}
+
+function addDocumentDeselectionEventListener() {
+    document.addEventListener('click', () => {
+        deselectBook();
+    });
 }
 
 function normalizeIds() {
@@ -254,12 +274,8 @@ function loadFormContainer(id = 0) {
         books.forEach(currBook => {
             if (currBook.id === id) {
                 book = currBook;
-                cancelEditBook = currBook;
             }
         })
-
-        books = books.filter(bookF => bookF.id !== id)
-        saveBooksToLocalStorage()
     }
 
     const booksContainerElement = document.querySelector('.books-container');
@@ -531,10 +547,6 @@ function unloadContainer() {
 }
 
 function cancelAddBook() {
-    if (cancelEditBook !== null) {
-        books.push(cancelEditBook);
-        cancelEditBook = null;
-    }
     loadBookContainer();
 }
 
@@ -559,6 +571,7 @@ function addBook(e) {
     let book = new Book(title, authorName, notes, haveRead, genre,
         pageCount, rating, idSelected === null ? books.length + 1 : idSelected);
 
+    books = books.filter(bookF => (idSelected === null || bookF.id !== idSelected))
     books.push(book);
     saveBooksToLocalStorage()
     loadBookContainer();
@@ -570,6 +583,7 @@ function loadBookContainer() {
     setContainerHeading('My Books');
     addControlButtons('remove', 'add', 'edit');
     addSelectionEventListener();
+    addDocumentDeselectionEventListener();
     addRemoveButtonEventListener();
     addAddButtonEventListener();
     addEditButtonEventListener();
